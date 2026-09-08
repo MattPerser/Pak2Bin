@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "subaru-pak"
+version = "0.1.0"
+description = "Convert Subaru FlashWrite .pak files to raw ROM images (.bin/.hex)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["subaru", "ecu", "flashwrite", "pak", "rom", "ssm", "denso"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Embedded Systems",
+    "Topic :: Utilities",
+]
+dependencies = ["click>=8.0"]
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.5"]
+# Optional C backend for RC2. The pure-Python path stays the reference, and the
+# fast one is only trusted after matching it byte for byte at import.
+fast = ["pycryptodome>=3.15"]
+dev = ["pytest>=7", "build", "nuitka>=2.0", "pycryptodome>=3.15"]
+
+[project.scripts]
+subaru-pak = "subaru_pak.cli:run"
+
+[project.gui-scripts]
+subaru-pak-gui = "subaru_pak.gui.app:main"
+
+[tool.setuptools]
+# The core library is pure Python and imports no GUI code; the gui subpackage is
+# only reached through the gui entry point.
+packages = ["subaru_pak", "subaru_pak.gui"]
+
+[tool.setuptools.package-data]
+subaru_pak = ["data/*.csv"]
+"subaru_pak.gui" = ["art/*.jpg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]
+filterwarnings = ["error::DeprecationWarning:subaru_pak.*"]
