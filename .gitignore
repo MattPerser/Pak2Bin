@@ -1,0 +1,38 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+*.build/
+*.dist/
+*.onefile-build/
+build-nuitka/
+build-unified/
+build-onefile/
+*.bin
+*.hex
+.DS_Store
+Thumbs.db
+
+# --- NOT for public distribution -------------------------------------------
+# Subaru's proprietary pack database (RC2 keys + vehicle data), lifted from
+# FlashWrite. The app reads it from a local FlashWrite install or --db instead.
+subaru_pak/data/*.csv
+reference/*.csv
+
+# Real ECU firmware and pak files -- do not publish. The test suite skips
+# automatically when test_data/ is absent (see tests/conftest.py).
+test_data/
+demo/
+
+# Local reverse-engineering scaffolding: original reference scripts, the
+# FastECU-derived C++, and any databases dropped here. Not part of the package.
+reference/
+
+# The build icon IS committed (built from art/); keep it tracked.
+!packaging/subaru-pak.ico
+build-rel/

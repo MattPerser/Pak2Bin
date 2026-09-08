@@ -1,0 +1,3 @@
+include LICENSE README.md HANDOFF.md
+recursive-include subaru_pak/data *.csv
+recursive-include tests *.py
