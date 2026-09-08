@@ -35,3 +35,4 @@ reference/
 
 # The build icon IS committed (built from art/); keep it tracked.
 !packaging/subaru-pak.ico
+build-rel/
